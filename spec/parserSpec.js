@@ -40,4 +40,19 @@ describe('parser http', function(){
         expect(output).toEqual(expected)
 
     })
+    it ('handles multiple headers', function(){
+        const request = 'GET / HTTP/1.1\ncontent-type: text/HTML; charset=utf8\nAccept: text/HTML'
+        const output = parseHttp(request)
+        const expected ={
+            verb: 'GET',
+            path: '/',
+            version: 'HTTP/1.1',
+            headers: {
+                'content-type': 'text/HTML; charset=utf8',
+                'Accept': 'text/HTML'
+            }
+        }
+        expect(output).toEqual(expected)
+
+    })
 })
